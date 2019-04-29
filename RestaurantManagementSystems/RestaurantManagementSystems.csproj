@@ -1,0 +1,99 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-RestaurantManagementSystems-2F6B9B4A-9BA9-479C-85B6-235CB20E7371</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20190413070233_PhoneFieldChange2_payroll.cs" />
+    <Compile Remove="Data\Migrations\20190413070233_PhoneFieldChange2_payroll.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190413082110_AddDepartmentID_payroll.cs" />
+    <Compile Remove="Data\Migrations\20190413082110_AddDepartmentID_payroll.Designer.cs" />
+    <Compile Remove="Migrations\20190408051836_RestaurantManagement.cs" />
+    <Compile Remove="Migrations\20190408051836_RestaurantManagement.Designer.cs" />
+    <Compile Remove="Migrations\20190408052605_CreatingRManagementTables.cs" />
+    <Compile Remove="Migrations\20190408052605_CreatingRManagementTables.Designer.cs" />
+    <Compile Remove="Migrations\20190408055917_CreatingRManagementTables.cs" />
+    <Compile Remove="Migrations\20190408055917_CreatingRManagementTables.Designer.cs" />
+    <Compile Remove="Migrations\20190408060322_CreatingRManagementTables.cs" />
+    <Compile Remove="Migrations\20190408060322_CreatingRManagementTables.Designer.cs" />
+    <Compile Remove="Migrations\20190408060712_CreatingRManagementTables.cs" />
+    <Compile Remove="Migrations\20190408060712_CreatingRManagementTables.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="17.1.0.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Pages\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Departments\Index1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Dependents\Index1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Salaries\Index1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Shared\Error.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Shared\_CookieConsentPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Shared\_Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Shared\_LoginPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\Shared\_ValidationScriptsPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\PayrollSystem\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\MenuItems\Index1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OrderDetails\Index1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Orders\Index1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LayoutLogin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ShoppingCart\CartSummary.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ShoppingCart\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\PayrollSystem\Data\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\InventoryControl\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\chart.js\Chart.bundle.js" />
+    <None Include="wwwroot\lib\chart.js\Chart.bundle.min.js" />
+    <None Include="wwwroot\lib\chart.js\Chart.js" />
+    <None Include="wwwroot\lib\chart.js\Chart.min.js" />
+  </ItemGroup>
+
+</Project>

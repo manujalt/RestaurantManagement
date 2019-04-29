@@ -1,0 +1,96 @@
+﻿@model coderush.Models.PurchaseOrder
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PurchaseOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrderName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrderName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BranchId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VendorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseTypeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubTotal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tax)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tax)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Freight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Freight)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

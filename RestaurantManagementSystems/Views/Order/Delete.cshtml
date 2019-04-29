@@ -1,0 +1,58 @@
+﻿@page
+@model RestaurantManagementSystems.Views.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PersonName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.PersonName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.TotalAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.TotalAmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PaymentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.PaymentType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PaymentMode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.PaymentMode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Orderstatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.Orderstatus)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Order.OrderID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

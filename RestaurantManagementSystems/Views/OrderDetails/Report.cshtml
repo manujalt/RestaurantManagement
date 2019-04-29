@@ -1,0 +1,650 @@
+﻿@*@model IEnumerable<RestaurantManagementSystems.Models.OrderDetail>*@
+
+<script>
+    $(document).ready(function () {
+        $.post("/Orders/OrderTotal",
+            function (data) {
+                $('#cart-total').text('TOTAL SALE FOR TODAY: ' + data);
+            });
+
+        $.post("/Orders/HourlyOrderTotal",
+            function (data) {
+                var json = data;
+                for (var k = 0; k < Object.keys(json[0]).length; k++) {
+                    $('#table_head1').append('<td style="width:150px">' + Object.keys(json[0])[k] + '</td>');
+                    //alert('p');
+                }
+
+                // Get table body and print
+                for (var i = 0; i < Object.keys(json).length; i++) {
+                    $('#table_content1').append('<tr>');
+                    for (var j = 0; j < Object.keys(json[0]).length; j++) {
+                        $('#table_content1').append('<td style="width:150px">' + json[i][Object.keys(json[0])[j]] + '</td>');
+                    }
+                    $('#table_content1').append('</tr>');
+                }
+
+
+
+
+                var hours = [];
+                var noofOders = [];
+                //var price = [];
+                for (var i = 0; i < Object.keys(json).length; i++) {
+                    hours[i] = json[i][Object.keys(json[0])[0]];
+                    noofOders[i] = json[i][Object.keys(json[0])[1]];
+                    //price[i] = json[i][Object.keys(json[0])[2]];
+                    //alert(json[i][Object.keys(json[0])[1]]);
+                }
+                var ya = [1, 2, 3, 4, 5, 6, 7];
+                // Bar Chart Example
+                var ctx = document.getElementById("myBarChart1");
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: hours,
+                        datasets: [{
+                            label: "No of Orders",
+                            backgroundColor: "#4e73df",
+                            hoverBackgroundColor: "#2e59d9",
+                            borderColor: "#4e73df",
+                            data: noofOders,
+                        }],
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 25,
+                                top: 25,
+                                bottom: 0
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    unit: 'Item'
+                                },
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                //ticks: {
+                                //    maxTicksLimit: 6
+                                //},
+                                maxBarThickness: 25,
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 100,
+                                    maxTicksLimit: 5,
+                                    padding: 10,
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, values) {
+                                        return number_format(value);
+                                    }
+                                },
+                                gridLines: {
+                                    color: "rgb(234, 236, 244)",
+                                    zeroLineColor: "rgb(234, 236, 244)",
+                                    drawBorder: false,
+                                    borderDash: [2],
+                                    zeroLineBorderDash: [2]
+                                }
+                            }],
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltips: {
+                            titleMarginBottom: 10,
+                            titleFontColor: '#6e707e',
+                            titleFontSize: 14,
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10,
+                            callbacks: {
+                                label: function (tooltipItem, chart) {
+                                    var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                    return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+                                }
+                            }
+                        },
+                    }
+                });
+            });
+
+
+
+    });
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $.post("/OrderDetails/Reporting",
+            function (data) {
+                //alert(0);
+                //$('#cart-total').text('TOTAL ORDER AMOUNT FOR TODAY IS: ' + data);
+                
+                var json = data;
+                var menuItems = [];
+                var noofOders = [];
+                var price = [];
+                for (var i = 0; i < Object.keys(json).length; i++) {
+                    menuItems[i] = json[i][Object.keys(json[0])[0]];
+                    noofOders[i] = json[i][Object.keys(json[0])[1]];
+                    price[i] = json[i][Object.keys(json[0])[2]]  ;
+                    //alert(json[i][Object.keys(json[0])[1]]);
+                }
+                var ya = [1, 2, 3, 4, 5, 6, 7];
+
+
+                for (var k = 0; k < Object.keys(json[0]).length; k++) {
+                    $('#table_head').append('<td style="width:150px">' + Object.keys(json[0])[k] + '</td>');
+                    //alert('p');
+                }
+                $('#table_head').append('<td style="width:150px"> TotalPrice </td>');
+
+                // Get table body and print
+                for (var i = 0; i < Object.keys(json).length; i++) {
+                    $('#table_content').append('<tr>');
+                    for (var j = 0; j < Object.keys(json[0]).length; j++) {
+                        $('#table_content').append('<td style="width:150px">' + json[i][Object.keys(json[0])[j]] + '</td>');
+                        //alert(json[i][Object.keys(json[0])[j]]);
+                    }
+                    $('#table_content').append('<td style="width:150px">' + price[i] * noofOders[i]  + '</td>');
+                    //out += arr[i][0] + ",";
+                    //alert('p');
+                    $('#table_content').append('</tr>');
+                }
+              
+            
+
+
+                 
+                    // Bar Chart Example
+                    var ctx = document.getElementById("myBarChart");
+                    var myBarChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: menuItems,
+                            datasets: [{
+                                label: "No of Orders",
+                                backgroundColor: "#4e73df",
+                                hoverBackgroundColor: "#2e59d9",
+                                borderColor: "#4e73df",
+                                data: noofOders,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            layout: {
+                                padding: {
+                                    left: 10,
+                                    right: 25,
+                                    top: 25,
+                                    bottom: 0
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    time: {
+                                        unit: 'Item'
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false
+                                    },
+                                    //ticks: {
+                                    //    maxTicksLimit: 6
+                                    //},
+                                    maxBarThickness: 25,
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        min: 0,
+                                        max: 100,
+                                        maxTicksLimit: 5,
+                                        padding: 10,
+                                        // Include a dollar sign in the ticks
+                                        callback: function (value, index, values) {
+                                            return number_format(value);
+                                        }
+                                    },
+                                    gridLines: {
+                                        color: "rgb(234, 236, 244)",
+                                        zeroLineColor: "rgb(234, 236, 244)",
+                                        drawBorder: false,
+                                        borderDash: [2],
+                                        zeroLineBorderDash: [2]
+                                    }
+                                }],
+                            },
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                titleMarginBottom: 10,
+                                titleFontColor: '#6e707e',
+                                titleFontSize: 14,
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyFontColor: "#858796",
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                xPadding: 15,
+                                yPadding: 15,
+                                displayColors: false,
+                                caretPadding: 10,
+                                callbacks: {
+                                    label: function (tooltipItem, chart) {
+                                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                        return datasetLabel + ': ' +  number_format(tooltipItem.yLabel);
+                                    }
+                                }
+                            },
+                        }
+                    });
+            });
+
+    });
+
+
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+    function number_format(number, decimals, dec_point, thousands_sep) {
+        // *     example: number_format(1234.56, 2, ',', ' ');
+        // *     return: '1 234,56'
+        number = (number + '').replace(',', '').replace(' ', '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+
+</script>
+
+<style>
+    *, ::after, ::before {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0px;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #e3e6f0;
+        border-radius: .35rem;
+    }
+
+    .shadow {
+        -webkit-box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important;
+        box-shadow: 0px 0.15rem 1.75rem 0px rgba(58,59,69,0.15) !important;
+    }
+
+    .mb-4, .my-4 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+        position: relative;
+        width: 100%;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
+    .col-lg-7 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 58.33333%;
+        flex: 0 0 58.33333%;
+        max-width: 58.33%;
+    }
+
+    .col-xl-8 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 66.66667%;
+        flex: 0 0 66.66667%;
+        max-width: 66.66%;
+    }
+
+    .row {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -0.75rem;
+        margin-left: -0.75rem;
+    }
+
+    .container-fluid {
+        width: 100%;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .container, .container-fluid {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    #wrapper #content-wrapper #content {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+        flex: 1 0 auto;
+    }
+
+    .d-flex {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+    }
+
+    .flex-column {
+        -webkit-box-orient: vertical !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
+
+    #wrapper #content-wrapper {
+        background-color: #f8f9fc;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    #wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    body {
+        margin: 0;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #858796;
+        text-align: left;
+        background-color: #fff;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    html {
+        font-family: sans-serif;
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+
+    :root {
+        --blue: #4e73df;
+        --indigo: #6610f2;
+        --purple: #6f42c1;
+        --pink: #e83e8c;
+        --red: #e74a3b;
+        --orange: #fd7e14;
+        --yellow: #f6c23e;
+        --green: #1cc88a;
+        --teal: #20c9a6;
+        --cyan: #36b9cc;
+        --white: #fff;
+        --gray: #858796;
+        --gray-dark: #5a5c69;
+        --primary: #4e73df;
+        --secondary: #858796;
+        --success: #1cc88a;
+        --info: #36b9cc;
+        --warning: #f6c23e;
+        --danger: #e74a3b;
+        --light: #f8f9fc;
+        --dark: #5a5c69;
+        --breakpoint-xs: 0;
+        --breakpoint-sm: 576px;
+        --breakpoint-md: 768px;
+        --breakpoint-lg: 992px;
+        --breakpoint-xl: 1200px;
+        --font-family-sans-serif: "Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .card-header {
+        padding: .75rem 1.25rem;
+        margin-bottom: 0px;
+        background-color: #f8f9fc;
+        border-bottom: 1px solid #e3e6f0;
+    }
+
+    .pt-3, .py-3 {
+        padding-top: 1rem !important;
+    }
+
+    .pb-3, .py-3 {
+        padding-bottom: 1rem !important;
+    }
+
+    :first-child.card-header {
+        border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0;
+    }
+
+    .card-body {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+
+    .chart-bar {
+        position: relative;
+        height: 10rem;
+        width: 100%;
+    }
+
+    .chart-bar {
+        height: 20rem;
+    }
+
+    hr {
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+        height: 0px;
+        overflow: visible;
+    }
+
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0,0,0,.1);
+    }
+
+    code, kbd, pre, samp {
+        font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+        font-size: 1em;
+    }
+
+    code {
+        font-size: 87.5%;
+        color: #e83e8c;
+        word-break: break-word;
+    }
+
+    .chartjs-size-monitor, .chartjs-size-monitor-expand, .chartjs-size-monitor-shrink {
+        position: absolute;
+        direction: ltr;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        overflow: hidden;
+        pointer-events: none;
+        visibility: hidden;
+        z-index: -1;
+    }
+
+    .chartjs-render-monitor {
+        animation: chartjs-render-animation 1ms;
+    }
+
+    .chartjs-size-monitor-shrink > div {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        left: 0px;
+        top: 0px;
+    }
+
+    .chartjs-size-monitor-expand > div {
+        position: absolute;
+        width: 1000000px;
+        height: 1000000px;
+        left: 0px;
+        top: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 0px;
+        margin-bottom: 0.5rem;
+    }
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.5rem;
+        font-weight: 400;
+        line-height: 1.2;
+    }
+
+    .h6, h6 {
+        font-size: 1.5rem;
+    }
+
+    .m-0 {
+        margin: 0 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: 700 !important;
+    }
+
+    .text-primary {
+        color: #4e73df !important;
+    }
+</style>
+
+<div id="cart-total" style="font-size:larger;font-weight:bold"></div>
+
+
+@*<div class="col-xl-8 col-lg-7">
+
+
+    </div>*@
+
+<div class="row">
+    <div class="col-lg-6">
+        <!-- Basic Card Example -->
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Total numbers of Orders for every Menu Item in a day-</h6>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h2></h2>
+                    <table>
+                        <thead>
+                            <tr id="table_head"></tr>
+                        </thead>
+                        <tbody id="table_content"></tbody>
+                    </table>
+                    <!-- Bar Chart -->
+                    @*<div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                        </div>*@
+                    <div class="card-body">
+                        <div class="chart-bar">
+                            <canvas id="myBarChart"></canvas>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Total Numbers of Orders on hourly bases:-</h6>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h2></h2>
+                    <table>
+                        <thead>
+                            <tr id="table_head1"></tr>
+                        </thead>
+                        <tbody id="table_content1"></tbody>
+                    </table>
+                    <!-- Bar Chart -->
+                    <div class="card-body">
+                        <div class="chart-bar">
+                            <canvas id="myBarChart1"></canvas>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/chart.js/Chart.js"></script>
+@*<script src="~/js/chart-bar-demo.js"></script>*@

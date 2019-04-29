@@ -1,0 +1,44 @@
+﻿@model RestaurantManagementSystems.PayrollSystem.Models.Salaries
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Salaries</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SailaryMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SailaryMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SailaryAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SailaryAmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherGifts)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OtherGifts)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Employee.EmployeeID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SailaryID">Edit</a> |
+    <p class="button">
+        @Html.ActionLink("Back to List", "Index", "Employees")
+    </p>
+</div>

@@ -1,0 +1,101 @@
+﻿@model RestaurantManagementSystems.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Orderstatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Orderstatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.OrderID">Edit</a>*@
+    @Html.ActionLink("Get Order Items ", "Index1", "OrderDetails", new { id = Model.OrderID })|
+    <a asp-action="Index1"> Back to Todays Order List </a>|
+    <a asp-action="Index"> Back to All Order List </a>|
+
+</div>
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                UnitPrice
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Menus
+            </th>
+            <th>
+                Order
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItem)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Menus.MenuID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrderID)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OrderItemID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.OrderItemID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrderItemID">Delete</a>
+                </td>
+            </tr>
+           
+        }
+    </tbody>
+</table>*@

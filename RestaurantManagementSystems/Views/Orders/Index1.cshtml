@@ -1,0 +1,91 @@
+﻿@model IEnumerable<RestaurantManagementSystems.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<script>
+    $(document).ready(function () {
+        $.post("/Orders/OrderTotal",
+            function (data) {
+
+                // Successful requests get here
+                // Update the page elements
+                //var data = JSON.parse(data1);
+                //alert(data.cartTotal);
+                //if (data.itemCount == 0) {
+                //    $('#row-' + data.deleteId).fadeOut('slow');
+                //    //alert("Hiderow");
+                //} else {
+                //    //alert(data.itemCount);
+                //    $('#item-count-' + data.deleteId).text(data.itemCount);
+                //}
+                $('#cart-total').text('TOTAL ORDER AMOUNT FOR TODAY IS: ' + data);
+                //alert(data.message);
+                //$('#update-message').text(data.message);
+                ////alert(data.cartCount);
+                //$('#contentcart a').text('Cart (' + data.cartCount + ')');
+            });
+    });
+</script>
+<p>
+    <div id="cart-total" style="font-size:larger;font-weight:bold"></div>
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+@Html.ActionLink("Report ", "Report", "OrderDetails")
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orderstatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orderstatus)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a>*@ |
+                    <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                    @*<a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

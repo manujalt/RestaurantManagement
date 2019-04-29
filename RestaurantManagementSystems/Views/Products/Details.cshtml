@@ -1,0 +1,66 @@
+﻿@model coderush.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Barcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImageUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductImageUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitOfMeasureId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitOfMeasureId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DefaultBuyingPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DefaultBuyingPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BranchId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

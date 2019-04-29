@@ -1,0 +1,75 @@
+﻿@model RestaurantManagementSystems.Models.Order
+@{
+    ViewBag.Title = "Address And Payment"; }
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        $('td').each(function (index) {
+            //alert(index);
+            //var tds = td.find("td[id='11']");
+            //tds.hide();
+            $('.RemoveLink').hide();
+            //tr.find("td[id='11']");
+        });
+        $('#22').hide();
+        
+            //alert(8);
+        //if ($("#cart-total").val() != 0) {
+
+        //    //alert(33);
+            
+        //}
+        //else { $('#order').hide();}
+
+        
+    });
+
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+    //function CallPrint(strid) {
+    //    var prtContent = document.getElementById(strid);
+    //    var WinPrint = window.open('', '', 'letf=0,top=0,width=800,height=100,toolbar=0,scrollbars=0,status=0,dir=ltr');
+    //    WinPrint.document.write(prtContent.innerHTML);
+    //    WinPrint.document.close();
+    //    WinPrint.focus();
+    //    WinPrint.print();
+    //    WinPrint.close();
+    //    prtContent.innerHTML = strOldOne;
+    //}
+</script>
+@using (Html.BeginForm())
+{
+
+    <h2>@*Address And Payment*@</h2>
+    <div id="div_print" style="width:500px">
+
+        @await Component.InvokeAsync("CartView", new { maxPriority = 4, isDone = true })
+
+    </div>
+    @*<input name="b_print" type="button" class="ipt" onClick="printdiv('div_print');" value=" Print ">*@
+    @*<asp:button id="BtnPrint" runat="server" onclientclick="javascript:CallPrint('bill');" text="Print" xmlns:asp="#unknown" />*@
+    <fieldset>
+        <legend></legend>
+        @*@Html.EditorForModel()*@
+    </fieldset>
+    <fieldset>
+        <legend>Payment</legend>
+        <p>We're running a promotion: all music is free with the promo code: "FREE"</p>
+        <div class="editor-label">
+            @Html.Label("Promo Code")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("PromoCode", "FREE")
+        </div>
+    </fieldset>
+    <input type="submit" id="order" value="Submit Order" onClick="printdiv('div_print');" />
+}

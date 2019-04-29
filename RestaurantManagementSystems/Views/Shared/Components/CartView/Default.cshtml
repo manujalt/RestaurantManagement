@@ -1,0 +1,122 @@
+﻿
+@model RestaurantManagementSystems.ViewModels.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Shopping Cart";
+
+}
+    <script type="text/javascript">
+
+        $(function () {
+            // Document.ready -> link up remove event handler
+            $(".RemoveLink").click(function () {
+                // Get the id from the link
+                //alert(2);
+                var recordToDelete = $(this).attr("data-id");
+                if (recordToDelete != '') {
+                    // Perform the ajax post
+                    $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+                        function (data) {
+
+                            // Successful requests get here
+                            // Update the page elements
+                            //var data = JSON.parse(data1);
+                            //alert(data.cartTotal);
+                            if (data.itemCount == 0) {
+                                $('#row-' + data.deleteId).fadeOut('slow');
+                                //alert("Hiderow");
+                            } else {
+                                //alert(data.itemCount);
+                                $('#item-count-' + data.deleteId).text(data.itemCount);
+                            }
+                            $('#cart-total').text(data.cartTotal);
+                            //alert(data.message);
+                            $('#update-message').text(data.message);
+                            //alert(data.cartCount);
+                            $('#contentcart a').text('Cart (' + data.cartCount + ')');
+                        });
+                }
+                //if ($("#cart-total").val() == '0') {
+
+                //    alert(33);
+                //    $('#22').hide();
+                //}
+                //else { alert(21);}
+                
+            });
+        });
+        function handleUpdate() {
+            // Load and deserialize the returned JSON data
+            var json = context.get_data();
+            var data = Sys.Serialization.JavaScriptSerializer.deserialize(json);
+            // Update the page elements
+            if (data.ItemCount == 0) {
+                $('#row-' + data.DeleteId).fadeOut('slow');
+            } else {
+                $('#item-count-' + data.DeleteId).text(data.ItemCount);
+            }
+            $('#cart-total').text(data.CartTotal);
+            $('#update-message').text(data.Message);
+            $('#cart-status').text('Cart (' + data.CartCount + ')');
+        }
+        $(document).ready(function () {
+            //alert(8);
+            if ($("#cart-total").val() == '0') {
+            
+                //alert(33);
+            $('#22').hide();
+        }
+        });
+
+    </script>
+<h3 style="width:300px">
+    @*Order Details:-*@
+</h3>
+<p class="button" id="22">
+    @Html.ActionLink("Checkout ", "AddressAndPayment", "Checkout")
+</p>
+<div id="update-message" style="width:500px">
+</div>
+<table>
+    <tr>
+        <th>
+            Menu Name
+        </th>
+        <th>
+            Price(each) 
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr> @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.RecordId">
+            <td>
+                @item.Menu.Name
+                @*@Html.ActionLink(item.Menu.Name, "Details", "Menu", new { id = item.MenuItemId }, null)*@
+            </td>
+            <td>
+                @item.Menu.Price
+            </td>
+            <td id="item-count-@item.RecordId">
+                @item.Count
+            </td>
+            <td id="11">
+                <a href="#" class="RemoveLink" data-id="@item.RecordId">Remove_from_cart</a>
+                @*@Html.ActionLink("RemoveFromCart", "RemoveFromCart", "ShoppingCart", new { id = item.MenuItemId }, "")*@
+            </td>
+        </tr>
+    }
+    <tr>
+    <td>___</td>
+    </tr>
+    <tr>
+        <td>
+            Total
+        </td>
+        <td></td>
+        <td id="cart-total">
+            @Model.CartTotal
+        </td>
+    </tr>
+</table>

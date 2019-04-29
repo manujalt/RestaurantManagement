@@ -1,0 +1,54 @@
+﻿<div class="login-box-body">
+    <div class="login-logo">
+        <a href="/"><b>Inven</b>Tory</a>
+    </div>
+    <p class="login-box-msg">Sign in to start your session</p>
+    <form action="/Account/Login?returnurl=%2F" method="post" novalidate="novalidate">
+        <div class="form-group has-feedback">
+            <label for="Email">Email</label>
+            <input name="Email" class="form-control" id="Email" type="email" placeholder="Email" value="super@admin.com" data-val-required="The Email field is required." data-val-email="The Email field is not a valid e-mail address." data-val="true">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Email"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="Password">Password</label>
+            <input name="Password" class="form-control" id="Password" type="password" placeholder="Password" value="123456" data-val-required="The Password field is required." data-val="true">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Password"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-6">
+                <div class="checkbox icheck">
+                    <label>
+                        <input name="RememberMe" id="RememberMe" type="checkbox" value="true" data-val-required="The Remember me? field is required." data-val="true">  Remember me?
+                    </label>
+                </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-4">
+                <button class="btn btn-primary btn-block btn-flat" type="submit">Sign In</button>
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="social-auth-links text-center hidden">
+            <p>- OR -</p>
+            <a class="btn btn-block btn-social btn-facebook btn-flat" href="#">
+                <i class="fa fa-facebook"></i> Sign in using
+                Facebook
+            </a>
+            <a class="btn btn-block btn-social btn-google btn-flat" href="#">
+                <i class="fa fa-google-plus"></i> Sign in using
+                Google+
+            </a>
+        </div>
+        <!-- /.social-auth-links -->
+        <a class="hidden" href="/Account/ForgotPassword">I forgot my password</a><br>
+        <a class="text-center hidden" href="/Account/Register?returnurl=%2F">Register a new membership</a>
+        <p class="pull-right">
+            <span style="font-style:italic;"><small>*Demo =&gt; Email: super@admin.com Password: 123456</small></span>
+        </p>
+        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8CXQU9v3Z35NtUndHSm7iiQEcCZEgQloOSg4xnM6Jjj7LqZkJqUEJcpibwW6rqj8cwCRl9I14xEvDaMSafG7JvaUe6H7HZaFeLh_v1vWaQiXCylFsKKedkWVUyE88jq5GqxXJKTQnqCTvHHe7jXvG5E"><input name="RememberMe" type="hidden" value="false">
+    </form>
+
+</div>

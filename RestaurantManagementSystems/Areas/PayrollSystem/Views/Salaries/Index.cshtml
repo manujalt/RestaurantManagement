@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RestaurantManagementSystems.PayrollSystem.Models.Salaries>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SailaryMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SailaryAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherGifts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SailaryMonth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SailaryAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherGifts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.EmployeeID)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SailaryID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SailaryID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SailaryID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="button">
+    @Html.ActionLink("Back to List", "Index", "Employees")
+</p>
